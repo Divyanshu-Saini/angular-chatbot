@@ -11,19 +11,20 @@ import 'rxjs/add/operator/scan';
 })
 export class ChatDialogComponent implements OnInit {
 
-  message: Observable<Message[]>;
+  messages: Observable<Message[]>;
   formValue: string;
 
   constructor(public chat: ChatService) { }
 
   ngOnInit() {
     // appends to array after each new message is added to feedSource
-    this.message = this.chat.conversation.asObservable()
+    this.messages = this.chat.conversation.asObservable()
       .scan(((acc, val) => acc.concat(val)));
   }
 
   sendMessage() {
     this.chat.converse(this.formValue);
+    console.log(this.formValue);
     this.formValue = '';
   }
 }

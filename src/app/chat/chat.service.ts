@@ -22,7 +22,7 @@ export class ChatService {
   converse(msg: string) {
     const userMessage = new Message(msg, 'user');
     this.update(userMessage);
-
+    console.log(this.token);
     return this.client.textRequest(msg)
       .then(res => {
         const speech = res.result.fulfillment.speech;
@@ -34,5 +34,6 @@ export class ChatService {
   // Adds message to source
   update(msg: Message) {
     this.conversation.next([msg]);
+    console.log(this.token);
   }
 }
