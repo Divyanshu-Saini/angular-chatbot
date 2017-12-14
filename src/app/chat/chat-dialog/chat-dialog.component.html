@@ -10,3 +10,4 @@
 <label for="nameField">Your Message</label>
 <input type="text" [(ngModel)]="formValue" (keyup.enter)="sendMessage()">
 <button (click)="sendMessage()">Send</button>
+<button (click)="activateSpeechSearch()"  [disabled]="!showSearchButton">Speak</button>

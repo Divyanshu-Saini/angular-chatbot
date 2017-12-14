@@ -5,6 +5,7 @@ import { ApiAiClient } from 'api-ai-javascript';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+
 // Message class for displaying messages in the component
 export class Message {
   constructor(public content: string, public sentBy: string) { }

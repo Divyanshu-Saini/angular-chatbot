@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ChatModule } from './chat/chat.module';
 
+
 // importing chatmodule
 
 
@@ -13,7 +14,7 @@ import { ChatModule } from './chat/chat.module';
   ],
   imports: [
     BrowserModule,
-    ChatModule
+    ChatModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
