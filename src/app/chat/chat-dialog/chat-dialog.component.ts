@@ -17,7 +17,10 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   messages: Observable<Message[]>;
   formValue: string;
 
-  constructor(public chat: ChatService, private speechService: SpeechService) { }
+  constructor(public chat: ChatService, private speechService: SpeechService) {
+    this.showSearchButton = true;
+    this.speechData = '';
+   }
 
   ngOnInit() {
     // appends to array after each new message is added to feedSource
