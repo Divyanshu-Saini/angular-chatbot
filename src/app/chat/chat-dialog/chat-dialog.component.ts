@@ -20,7 +20,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   constructor(public chat: ChatService, private speechService: SpeechService) {
     this.showSearchButton = true;
     this.speechData = '';
-   }
+  }
 
   ngOnInit() {
     // appends to array after each new message is added to feedSource
@@ -46,12 +46,14 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
       // listener
       (value) => {
         this.speechData = value;
+        this.formValue = this.speechData;
+        this.sendMessage();
         console.log(value);
       },
       // errror
       (err) => {
         console.log(err);
-        if (err.error == 'no-speech') {
+        if (err.error === 'no-speech') {
           console.log('--restatring service--');
           this.activateSpeechSearch();
         }
@@ -60,7 +62,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
       () => {
         this.showSearchButton = true;
         console.log('--complete--');
-        this.activateSpeechSearch();
+        // this.activateSpeechSearch();
       });
   }
 }
