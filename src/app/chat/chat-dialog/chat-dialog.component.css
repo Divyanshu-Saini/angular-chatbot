@@ -20,3 +20,38 @@
 .message.from + .message.from {
 margin-top: -10px;
 }
+/* .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: left;
+} */
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.header {
+  padding: 5px 8px;
+  background: #555;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.content {
+  display:block;
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
