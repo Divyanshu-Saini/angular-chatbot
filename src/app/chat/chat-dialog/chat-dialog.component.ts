@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { ChatService, Message } from '../chat.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
@@ -12,11 +12,13 @@ declare const $: any;
   styleUrls: ['./chat-dialog.component.css']
 })
 
-export class ChatDialogComponent implements OnInit, OnDestroy {
+export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   showSearchButton: boolean;
   speechData: string;
   messages: Observable<Message[]>;
   formValue: string;
+  scroll: any;
 
   constructor(public chat: ChatService, private speechService: SpeechService) {
     this.showSearchButton = true;
@@ -27,6 +29,18 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
     // appends to array after each new message is added to feedSource
     this.messages = this.chat.conversation.asObservable()
       .scan(((acc, val) => acc.concat(val)));
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  // auto scroll
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
   }
 
   ngOnDestroy() {
@@ -66,4 +80,15 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
         // this.activateSpeechSearch();
       });
   }
+
+  restart() {
+    this.formValue = 'RESTART';
+    this.sendMessage();
+  }
+
+  exit() {
+    this.formValue = 'EXIT';
+    this.sendMessage();
+  }
+
 }
