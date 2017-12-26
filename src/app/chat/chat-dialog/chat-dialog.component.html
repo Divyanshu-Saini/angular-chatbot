@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col s8 m6 offset-s2 offset-m3" >
       <ng-container *ngFor="let message of messages | async">
-        <div class="message" [ngClass]="{'from':message.sentBY === 'bot','to':message.sentBy === 'user'}">
+        <div id="msg" class="message" [ngClass]="{'from':message.sentBY === 'bot','to':message.sentBy === 'user'}">
           {{message.content}}
         </div>
       </ng-container>

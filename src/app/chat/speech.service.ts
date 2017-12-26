@@ -20,7 +20,6 @@ export class SpeechService {
       // this.speechRecognition.interimResults = true;
       this.speechRecognition.lang = 'en-us';
       this.speechRecognition.maxAlternatives = 1;
-
       this.speechRecognition.onresult = speech => {
         let term: string = '';
         if (speech.results) {

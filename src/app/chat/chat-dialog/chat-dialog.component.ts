@@ -18,8 +18,6 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   messages: Observable<Message[]>;
   formValue: string;
 
-
-
   constructor(public chat: ChatService, private speechService: SpeechService) {
     this.showSearchButton = true;
     this.speechData = '';
