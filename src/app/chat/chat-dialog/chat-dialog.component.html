@@ -1,7 +1,14 @@
 <!-- <div class="container deep-orange lighten-1"> -->
-<div class="content"  style="overflow:scroll; height:400px;overflow-x: hidden;">
+<div class="navbar-fixed deep-orange lighten-1" id="myHeader">
   <div class="row">
-    <div class="col s8 m6 offset-s2 offset-m3" >
+    <div class="col s12 m12">
+      <h3 class="center">Interview</h3>
+    </div>
+  </div>
+</div>
+<div #scrollMe class="content" style="overflow:scroll; height:400px;overflow-x: hidden;">
+  <div class="row">
+    <div class="col 10 m8 offset-s2 offset-m3">
       <ng-container *ngFor="let message of messages | async">
         <div id="msg" class="message" [ngClass]="{'from':message.sentBY === 'bot','to':message.sentBy === 'user'}">
           {{message.content}}
@@ -12,14 +19,23 @@
 </div>
 <div class="footer">
   <div class="row">
-    <div class="col s9 m9 offset-s1 offset-m1">
+    <div class="col s7 m7 offset-s1 offset-m1">
       <label for="nameField">Your Message</label>
       <input type="text" [(ngModel)]="formValue" (keyup.enter)="sendMessage()">
     </div>
     <div class="col s1 m1">
-      <button class="btn-floating btn-large red" (click)="activateSpeechSearch()" [disabled]="!showSearchButton">
-         <i class="large material-icons">mic</i>
-       </button>
+      <button class="btn-floating btn-medium blue" (click)="activateSpeechSearch()" [disabled]="!showSearchButton">
+        <i class="large material-icons">mic</i>
+      </button>
+    </div>
+    <div class="col s1 m1">
+      <button class="btn-floating btn-medium green" (click)="restart()">Restart
+      </button>
+    </div>
+    <div class="col s1 m1">
+      <button class="btn-floating btn-medium red " (click)="exit()">
+        Exit
+      </button>
     </div>
   </div>
 </div>
