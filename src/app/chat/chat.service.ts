@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { SpeechService } from './speech.service';
 
 
 // Message class for displaying messages in the component
@@ -17,7 +18,7 @@ export class ChatService {
   readonly client = new ApiAiClient({ accessToken: this.token });
   conversation = new BehaviorSubject<Message[]>([]);
 
-  constructor() { }
+  constructor(private speechService: SpeechService) { }
 
   // Sends and receives messages via DialogFlow
   converse(msg: string) {
@@ -27,6 +28,7 @@ export class ChatService {
     return this.client.textRequest(msg)
       .then(res => {
         const speech = res.result.fulfillment.speech;
+        this.speechService.synthVoice(speech);
         const botMessage = new Message(speech, 'bot');
         this.update(botMessage);
       });

@@ -30,6 +30,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.messages = this.chat.conversation.asObservable()
       .scan(((acc, val) => acc.concat(val)));
     this.scrollToBottom();
+
   }
 
   ngAfterViewChecked() {
@@ -51,6 +52,8 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.chat.converse(this.formValue);
     console.log(this.formValue);
     this.formValue = '';
+    // console.log(JSON.stringify(this.messages))
+    // this.speak(this.messages.content);
   }
 
   activateSpeechSearch(): void {
@@ -91,4 +94,8 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.sendMessage();
   }
 
+  speak(text) {
+    console.log(text);
+    this.speechService.synthVoice(text);
+  }
 }

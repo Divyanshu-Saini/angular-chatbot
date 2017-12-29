@@ -8,10 +8,10 @@
 </div>
 <div #scrollMe class="content" style="overflow:scroll; height:400px;overflow-x: hidden;">
   <div class="row">
-    <div class="col 10 m8 offset-s2 offset-m3">
+    <div class="col 10 m8 offset-s1 offset-m2">
       <ng-container *ngFor="let message of messages | async">
-          <div id="msg" class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
-          'to':   message.sentBy === 'user' }">
+        <div id="msg" class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+          'to':   message.sentBy === 'user' }" >
           {{message.content}}
         </div>
       </ng-container>
