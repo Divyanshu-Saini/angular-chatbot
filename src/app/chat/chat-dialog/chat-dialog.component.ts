@@ -44,7 +44,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   ngOnDestroy() {
-    this.speechService.DestroySpeechObject();
+    this.speechService.destroySpeechObject();
   }
 
   sendMessage() {

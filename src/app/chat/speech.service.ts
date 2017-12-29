@@ -10,14 +10,16 @@ interface IWindow extends Window {
 @Injectable()
 export class SpeechService {
   speechRecognition: any;
+  utterance: any;
   constructor(private zone: NgZone) { }
+  // recording speech
   record(): Observable<string> {
 
     return Observable.create(observer => {
       const { webkitSpeechRecognition }: IWindow = <IWindow>window;
       this.speechRecognition = new webkitSpeechRecognition();
       this.speechRecognition.continuous = false;
-      // this.speechRecognition.interimResults = true;
+      this.speechRecognition.interimResults = false;
       this.speechRecognition.lang = 'en-us';
       this.speechRecognition.maxAlternatives = 1;
       this.speechRecognition.onresult = speech => {
@@ -52,7 +54,15 @@ export class SpeechService {
     });
   }
 
-  DestroySpeechObject() {
+  // text to speech conversion
+  synthVoice(botText) {
+    const textToSpeech = window.speechSynthesis;
+    this.utterance = new SpeechSynthesisUtterance();
+    this.utterance.text = botText;
+    textToSpeech.speak(this.utterance);
+  }
+  // destroyiong speech object
+  destroySpeechObject() {
     if (this.speechRecognition) {
       this.speechRecognition.stop();
     }
