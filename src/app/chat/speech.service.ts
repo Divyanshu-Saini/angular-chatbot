@@ -58,6 +58,7 @@ export class SpeechService {
   synthVoice(botText) {
     const textToSpeech = window.speechSynthesis;
     this.utterance = new SpeechSynthesisUtterance();
+    this.utterance.rate = 2.5;
     this.utterance.text = botText;
     textToSpeech.speak(this.utterance);
   }

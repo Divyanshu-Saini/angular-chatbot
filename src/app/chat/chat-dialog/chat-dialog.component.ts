@@ -89,6 +89,10 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.sendMessage();
   }
 
+  start() {
+    this.formValue = 'START';
+    this.sendMessage();
+  }
   exit() {
     this.formValue = 'EXIT';
     this.sendMessage();
