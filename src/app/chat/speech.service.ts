@@ -6,11 +6,15 @@ interface IWindow extends Window {
   webkitSpeechRecognition: any;
   SpeechRecognition: any;
 }
-
+// declare global{
+//   var textToSpeech:Window.speechSynthesis;
+// }
 @Injectable()
 export class SpeechService {
   speechRecognition: any;
   utterance: any;
+  // flag:boolean=true;
+  textToSpeech = window.speechSynthesis;
   constructor(private zone: NgZone) { }
   // recording speech
   record(): Observable<string> {
@@ -56,12 +60,23 @@ export class SpeechService {
 
   // text to speech conversion
   synthVoice(botText) {
-    const textToSpeech = window.speechSynthesis;
     this.utterance = new SpeechSynthesisUtterance();
-    this.utterance.rate = 2.5;
+    this.utterance.rate = 2;
     this.utterance.text = botText;
-    textToSpeech.speak(this.utterance);
+    this.textToSpeech.speak(this.utterance);
+    this.utterance.onstart = function (event) {
+ 
+      // this.voiceFlag=false;
+      console.log('We have started uttering this speech: ' + event.utterance.text);
+    }
+    this.utterance.onend = function (event) {
+      // this.voiceFlag = true;
+  
+     
+      console.log('Utterance has finished being spoken after ' + event.elapsedTime + ' milliseconds.');
+    }
   }
+
   // destroyiong speech object
   destroySpeechObject() {
     if (this.speechRecognition) {

@@ -19,10 +19,14 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
   messages: Observable<Message[]>;
   formValue: string;
   scroll: any;
+  
+  utterance: any;
 
   constructor(public chat: ChatService, private speechService: SpeechService) {
     this.showSearchButton = true;
     this.speechData = '';
+    this.utterance = this.speechService.utterance;
+
   }
 
   ngOnInit() {
@@ -30,11 +34,16 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.messages = this.chat.conversation.asObservable()
       .scan(((acc, val) => acc.concat(val)));
     this.scrollToBottom();
+    $(document).ready(function () {
+      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal();
+    });
 
   }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+    // this.flag = this.speechService.voiceFlag;
   }
 
   // auto scroll
@@ -48,17 +57,17 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.speechService.destroySpeechObject();
   }
 
+ 
+
   sendMessage() {
     this.chat.converse(this.formValue);
     console.log(this.formValue);
     this.formValue = '';
-    // console.log(JSON.stringify(this.messages))
-    // this.speak(this.messages.content);
+    // this.checkflag();
   }
 
   activateSpeechSearch(): void {
     this.showSearchButton = false;
-
     this.speechService.record()
       .subscribe(
       // listener
@@ -83,7 +92,6 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
         // this.activateSpeechSearch();
       });
   }
-
   restart() {
     this.formValue = 'RESTART';
     this.sendMessage();
