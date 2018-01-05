@@ -21,7 +21,7 @@
 
 <div class="footer">
   <div class="row">
-    <div class="col s7 m7">
+    <div class="col s7 m7 offset-s1 offset-m1">
       <label for="nameField">Your Message</label>
       <input type="text" [(ngModel)]="formValue" (keyup.enter)="sendMessage()">
     </div>
@@ -45,7 +45,7 @@
 
     </div>
     <div class="col s1 m1">
-      <button class="btn-floating btn-medium green modal-trigger" data-target="modal1">Note
+      <button class="btn-floating btn-medium green modal-trigger blue" data-target="modal1">Note
       </button>
     </div>
   </div>
@@ -59,13 +59,13 @@
     <ol>
       <li>It does not support small talks</li>
       <li>Answers should be in 1 sentence or maximum 2 sentence</li>
-      <li>To restart interview in between the process
+      <!-- <li>To restart interview in between the process
         <ol>
           <li>Click restart button </li>
           <li>Say restart</li>
           <li>Type restart</li>
         </ol>
-      </li>
+      </li> -->
       <li>To exit the interview process
         <ol>
           <li>Click Exit button</li>
