@@ -37,8 +37,9 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
     $(document).ready(function () {
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
+      $('#modal1').modal('open');
     });
-
+   
   }
 
   ngAfterViewChecked() {
@@ -98,7 +99,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   start() {
-    this.formValue = 'START';
+    this.formValue = 'Your Interview will start now';
     this.sendMessage();
   }
   exit() {
